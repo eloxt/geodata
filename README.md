@@ -4,6 +4,6 @@ Generated from [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2
 
 Upstream release: `202609072354`.
 
-GeoSite: `geosite/<category>.srs`; GeoIP: `geoip/<category>.srs`. GeoSite attribute categories use `<category>@<attribute>.srs`.
+Only CN rules are published: `geosite/cn.srs` and `geoip/cn.srs`.
 
 See [source and usage](https://github.com/eloxt/geodata) and `manifest.json` for provenance and checksums. Upstream data retains its original licenses.
