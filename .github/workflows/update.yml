@@ -1,0 +1,38 @@
+name: Update SRS rules
+
+on:
+  schedule:
+    # UTC 02:23 / UTC+8 10:23; latest upstream release is resolved at run time.
+    - cron: '23 2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update.yml'
+      - 'scripts/**'
+      - 'go.mod'
+      - 'go.sum'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-srs
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version: '1.27.x'
+          cache: true
+      - name: Download, convert and validate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/build.sh
+      - name: Publish srs branch
+        run: bash scripts/publish.sh
