@@ -17,5 +17,7 @@ gh release download "$tag" --repo Loyalsoldier/v2ray-rules-dat \
 GOBIN="$root/.cache/bin" go install "github.com/runetfreedom/geodat2srs@$converter"
 .cache/bin/geodat2srs geoip -i .cache/input/geoip.dat -o .cache/output/geoip --prefix ''
 .cache/bin/geodat2srs geosite -i .cache/input/geosite.dat -o .cache/output/geosite --prefix ''
+# The converter exports all categories; publish only the two CN rule sets.
+find .cache/output -type f -name '*.srs' ! -name 'cn.srs' -delete
 go run ./scripts/verify.go .cache/input .cache/output
 python3 scripts/manifest.py

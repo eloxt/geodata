@@ -26,8 +26,7 @@ manifest = {
     '# sing-box SRS rules\n\n'
     'Generated from [Loyalsoldier/v2ray-rules-dat](' + release['html_url'] + ').\n\n'
     f'Upstream release: `{release["tag_name"]}`.\n\n'
-    'GeoSite: `geosite/<category>.srs`; GeoIP: `geoip/<category>.srs`. '
-    'GeoSite attribute categories use `<category>@<attribute>.srs`.\n\n'
+    'Only CN rules are published: `geosite/cn.srs` and `geoip/cn.srs`.\n\n'
     'See [source and usage](https://github.com/eloxt/geodata) and `manifest.json` for provenance and checksums. '
     'Upstream data retains its original licenses.\n'
 )

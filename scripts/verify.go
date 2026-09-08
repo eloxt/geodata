@@ -1,4 +1,4 @@
-// Validate every generated SRS and ensure all source categories were converted.
+// Validate the two CN rule sets and ensure both source categories exist.
 package main
 
 import (
@@ -32,10 +32,16 @@ func main() {
 				log.Fatal("empty geoip source")
 			}
 			for _, entry := range list.Entry {
+				if !strings.EqualFold(entry.CountryCode, "cn") {
+					continue
+				}
 				if entry.InverseMatch {
 					log.Fatal("converter does not support inverse GeoIP entries")
 				}
-				expected["geoip/"+strings.ToLower(entry.CountryCode)+".srs"] = true
+				if len(entry.Cidr) == 0 {
+					log.Fatal("empty geoip cn source")
+				}
+				expected["geoip/cn.srs"] = true
 			}
 		} else {
 			var list routercommon.GeoSiteList
@@ -46,20 +52,20 @@ func main() {
 				log.Fatal("empty geosite source")
 			}
 			for _, entry := range list.Entry {
-				code := strings.ToLower(entry.CountryCode)
-				expected["geosite/"+code+".srs"] = true
-				for _, domain := range entry.Domain {
-					for _, attribute := range domain.Attribute {
-						expected["geosite/"+code+"@"+attribute.Key+".srs"] = true
-					}
+				if !strings.EqualFold(entry.CountryCode, "cn") {
+					continue
 				}
+				if len(entry.Domain) == 0 {
+					log.Fatal("empty geosite cn source")
+				}
+				expected["geosite/cn.srs"] = true
 			}
 		}
 	}
+	if len(expected) != 2 {
+		log.Fatal("source must contain both geoip cn and geosite cn")
+	}
 	for name := range expected {
-		if strings.Contains(name, "..") || strings.Count(name, "/") != 1 || strings.Contains(name, "\\") {
-			log.Fatalf("invalid source category: %q", name)
-		}
 		file, err := os.Open(filepath.Join(os.Args[2], name))
 		if err != nil {
 			log.Fatal(err)
@@ -80,5 +86,5 @@ func main() {
 	if len(files) != len(expected) {
 		log.Fatalf("category count mismatch: got %d, expected %d", len(files), len(expected))
 	}
-	fmt.Printf("Validated %d SRS files, including GeoSite attribute categories.\n", len(files))
+	fmt.Printf("Validated %d CN SRS files.\n", len(files))
 }
