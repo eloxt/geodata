@@ -1,11 +1,11 @@
 {
   "upstream": "Loyalsoldier/v2ray-rules-dat",
-  "release": "202609082347",
-  "release_url": "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/tag/202609082347",
+  "release": "202609092346",
+  "release_url": "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/tag/202609092346",
   "converter": "runetfreedom/geodat2srs@368e4b324bb4b8c90da93d1b8429bd0af337dfda",
   "sources": {
     "geoip.dat": "4149e607530f91da697bad4696f8c59f0a475af38e69405e4124438c9886c721",
-    "geosite.dat": "110be548fd2c2d84249310842667f996e01ab5c753d526717a0f434a5a08e5ea"
+    "geosite.dat": "5193ed098d950b91ebfe7d40b91b298e5ac9f0f69aa2698c757bee2aceee8c29"
   },
   "counts": {
     "geoip": 1,
