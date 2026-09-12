@@ -1,8 +1,8 @@
 # sing-box SRS rules
 
-Generated from [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat/releases/tag/202609102337).
+Generated from [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat/releases/tag/202609112348).
 
-Upstream release: `202609102337`.
+Upstream release: `202609112348`.
 
 Only CN rules are published: `geosite/cn.srs` and `geoip/cn.srs`.
 
